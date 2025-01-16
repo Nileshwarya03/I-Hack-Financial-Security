@@ -1,10 +1,10 @@
 import React from 'react';
-import SetPassword from './pages/Setpassword';
+import Dashboard from './pages/Dashboard';
 
 
 function App() {
   return (
-  <SetPassword/>
+  <Dashboard/>
   );
 }
  
