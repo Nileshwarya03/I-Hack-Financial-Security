@@ -1,10 +1,10 @@
 import React from 'react';
-import Deepfakedetection from './pages/Deepfakedetection';
+import Financialfrauddetection from './pages/Financialfrauddetection'
 
 
 function App() {
   return (
-  <Deepfakedetection/>
+  <Financialfrauddetection/>
   );
 }
  
