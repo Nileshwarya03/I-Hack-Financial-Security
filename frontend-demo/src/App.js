@@ -1,10 +1,10 @@
 import React from 'react';
-import Financialfrauddetection from './pages/Financialfrauddetection'
+import VKYCmonitoring from './pages/VKYCmonitoring';
 
 
 function App() {
   return (
-  <Financialfrauddetection/>
+  <VKYCmonitoring/>
   );
 }
  
