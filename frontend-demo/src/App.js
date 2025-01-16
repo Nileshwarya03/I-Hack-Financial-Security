@@ -1,10 +1,10 @@
 import React from 'react';
-import Spamdetection from './pages/Spamdetection';
+import Deepfakedetection from './pages/Deepfakedetection';
 
 
 function App() {
   return (
-  <Spamdetection/>
+  <Deepfakedetection/>
   );
 }
  
