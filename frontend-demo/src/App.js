@@ -1,10 +1,10 @@
 import React from 'react';
-import Dashboard from './pages/Dashboard';
+import Spamdetection from './pages/Spamdetection';
 
 
 function App() {
   return (
-  <Dashboard/>
+  <Spamdetection/>
   );
 }
  
