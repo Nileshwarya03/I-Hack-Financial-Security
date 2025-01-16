@@ -1,10 +1,10 @@
 import React from 'react';
-import VerifyCode from './pages/Verifycode';
+import SetPassword from './pages/Setpassword';
 
 
 function App() {
   return (
-  <VerifyCode/>
+  <SetPassword/>
   );
 }
  
