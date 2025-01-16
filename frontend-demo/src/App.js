@@ -1,10 +1,10 @@
 import React from 'react';
-import Signup from './pages/Signup';
+import ForgotPassword from './pages/Forgotpassword';
 
 
 function App() {
   return (
-  <Signup/>
+  <ForgotPassword/>
   );
 }
  
