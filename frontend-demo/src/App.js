@@ -1,10 +1,10 @@
 import React from 'react';
-import VKYCmonitoring from './pages/VKYCmonitoring';
+import Viewalerts from './pages/Viewalerts';
 
 
 function App() {
   return (
-  <VKYCmonitoring/>
+  <Viewalerts/>
   );
 }
  

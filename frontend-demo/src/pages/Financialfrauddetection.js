@@ -42,7 +42,7 @@ const Financialfrauddetection = () => {
             <li><a href="/deepfake-detection">Deepfake Detection</a></li>
             <li><a href="/fraud-detection">Financial Fraud Detection</a></li>
             <li><a href="/vkyc-monitoring">vKYC Monitoring</a></li>
-            <li><a href="#risk-assessment">Risk Assessment</a></li>
+            {/* <li><a href="#risk-assessment">Risk Assessment</a></li> */}
             <li><a href="#alerts">Alerts</a></li>
             <li><a href="#reports">Reports</a></li>
             <li><a href="#account-settings">Account Settings</a></li>
