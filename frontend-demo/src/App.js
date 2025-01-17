@@ -1,10 +1,10 @@
 import React from 'react';
-import Viewalerts from './pages/Viewalerts';
+import Viewreports from './pages/Viewreports';
 
 
 function App() {
   return (
-  <Viewalerts/>
+  <Viewreports/>
   );
 }
  
