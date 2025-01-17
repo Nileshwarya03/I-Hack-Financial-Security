@@ -16,7 +16,7 @@ const Dashboard = () => {
             <li><a href="/deepfake-detection">Deepfake Detection</a></li>
             <li><a href="/fraud-detection">Financial Fraud Detection</a></li>
             <li><a href="/vkyc-monitoring">vKYC Monitoring</a></li>
-            <li><a href="#risk-assessment">Risk Assessment</a></li>
+            {/* <li><a href="#risk-assessment">Risk Assessment</a></li> */}
             <li><a href="#alerts">Alerts</a></li>
             <li><a href="#reports">Reports</a></li>
             <li><a href="#account-settings">Account Settings</a></li>
@@ -36,11 +36,11 @@ const Dashboard = () => {
 
         <div className="dashboard-main">
           {/* Risk Assessment Widget */}
-          <div className="main-widget large-widget">
+          {/* <div className="main-widget large-widget">
             <h2>Risk Assessment</h2>
             <p>Analyze your financial data to identify potential risks and vulnerabilities.</p>
             <button>Start Assessment</button>
-          </div>
+          </div> */}
 
           {/* Spam Detection Widget */}
           <div className="main-widget">
