@@ -1,10 +1,10 @@
 import React from 'react';
-import Settingspage from './pages/Settingspage';
+import Errorpage from './pages/Errorpage';
 
 
 function App() {
   return (
-  <Settingspage/>
+  <Errorpage/>
   );
 }
  
