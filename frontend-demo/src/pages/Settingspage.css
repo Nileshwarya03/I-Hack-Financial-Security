@@ -1,0 +1,148 @@
+.settings-wrapper {
+    display: flex;
+    height: 100vh;
+  }
+  
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    background: #000000;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+  }
+  
+  .sidebar-header {
+    text-align: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .sidebar-header h2 {
+    font-size: 28px;
+    margin: 0;
+    font-weight: bold;
+    letter-spacing: 2px;
+  }
+  
+  .sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebar-nav li {
+    margin: 25px 0;
+  }
+  
+  .sidebar-nav a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    padding: 15px 30px;
+    display: block;
+    transition: background 0.3s ease, padding-left 0.3s ease;
+    border-radius: 8px;
+  }
+  
+  .sidebar-nav a:hover {
+    background: #444;
+    padding-left: 40px;
+  }
+  
+  .sidebar-footer {
+    text-align: center;
+    padding: 25px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .sidebar-footer button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    background-color: #ffffffae;
+    color: rgb(6, 0, 0);
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .sidebar-footer button:hover {
+    background-color: #fbfbfb;
+  }
+  
+  .settings-content {
+    margin-left: 250px;
+    padding: 30px;
+    flex-grow: 1;
+    background-image: url('D:/i-Hack AWS Financial Security/I-Hack-Financial-Security/frontend-demo/public/assets/bg2.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    overflow-y: auto;
+  }
+  
+  .settings-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .settings-header h1 {
+    font-size: 36px;
+    font-weight: bold;
+  }
+  
+  .settings-section {
+    background: rgba(0, 0, 0, 0.422);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    margin: 60px;
+  }
+  
+  .settings-section h2 {
+    margin-bottom: 10px;
+  }
+  
+  .settings-section label {
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  .settings-section input[type="text"],
+  .settings-section input[type="email"],
+  .settings-section input[type="tel"],
+  .settings-section input[type="password"] {
+    width: 98%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .settings-section input[type="checkbox"] {
+    margin-right: 10px;
+  }
+  
+  .save-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #000000;
+    color: #fff;
+    transition: background-color 0.3s ease;
+  }
+  
+  .save-button:hover {
+    background-color: #ffffff;
+    color: #000;
+  }
+  

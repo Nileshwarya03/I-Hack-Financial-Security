@@ -1,10 +1,10 @@
 import React from 'react';
-import Viewreports from './pages/Viewreports';
+import Settingspage from './pages/Settingspage';
 
 
 function App() {
   return (
-  <Viewreports/>
+  <Settingspage/>
   );
 }
  
