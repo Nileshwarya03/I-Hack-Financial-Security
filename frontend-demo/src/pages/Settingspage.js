@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Settingspage.css';
+import Toast from './Toast'; // Assuming a reusable Toast component
 
 const Settingspage = () => {
   const [profile, setProfile] = useState({
@@ -14,6 +15,7 @@ const Settingspage = () => {
   });
 
   const [password, setPassword] = useState('');
+  const [toast, setToast] = useState(null); // State for toast notifications
 
   const handleProfileChange = (e) => {
     setProfile({ ...profile, [e.target.name]: e.target.value });
@@ -23,13 +25,29 @@ const Settingspage = () => {
     setNotifications({ ...notifications, [e.target.name]: e.target.checked });
   };
 
+  // Show toast notifications
+  const showToast = (message, type) => {
+    setToast({ message, type });
+    setTimeout(() => setToast(null), 3000); // Auto-hide toast after 3 seconds
+  };
+
   const updatePassword = () => {
-    alert('Password updated successfully.');
+    showToast('Password updated successfully.', 'success'); // Trigger toast on password update
     setPassword('');
+  };
+
+  const saveProfileChanges = () => {
+    showToast('Profile information saved successfully.', 'success'); // Trigger toast on profile save
+  };
+
+  const updateNotificationPreferences = () => {
+    showToast('Notification preferences updated.', 'success'); // Trigger toast on notification preferences update
   };
 
   return (
     <div className="settings-wrapper">
+      {toast && <Toast message={toast.message} type={toast.type} />} {/* Display toast */}
+
       <div className="sidebar">
         <div className="sidebar-header">
           <h2>Financial Security Hub</h2>
@@ -47,7 +65,7 @@ const Settingspage = () => {
           </ul>
         </div>
         <div className="sidebar-footer">
-          <button>Logout</button>
+          <button onClick={() => showToast('Logged out successfully!', 'info')}>Logout</button>
         </div>
       </div>
 
@@ -80,7 +98,7 @@ const Settingspage = () => {
             value={profile.phone}
             onChange={handleProfileChange}
           />
-          <button className="save-button">Save Changes</button>
+          <button className="save-button" onClick={saveProfileChanges}>Save Changes</button>
         </div>
 
         <div className="settings-section">
@@ -103,10 +121,10 @@ const Settingspage = () => {
             />
             SMS Alerts
           </label>
-          <button className="save-button">Update Preferences</button>
+          <button className="save-button" onClick={updateNotificationPreferences}>Update Preferences</button>
         </div>
 
-        
+        {/* You can add password section here if needed */}
       </div>
     </div>
   );

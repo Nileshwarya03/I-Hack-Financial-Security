@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Viewreports.css';
+import Toast from './Toast'; // Assuming a reusable Toast component
 
 const Viewreports = () => {
   const [reports] = useState([
@@ -9,13 +10,22 @@ const Viewreports = () => {
     { id: 4, title: 'vKYC Monitoring Overview', date: '2025-01-17', file: 'vkyc_overview.pdf' },
   ]);
 
+  const [toast, setToast] = useState(null); // Toast state
+
+  // Show toast notifications
+  const showToast = (message, type) => {
+    setToast({ message, type });
+    setTimeout(() => setToast(null), 3000); // Auto-hide toast after 3 seconds
+  };
+
   const downloadReport = (file) => {
-    // Simulate file download
-    alert(`Downloading ${file}`);
+    showToast(`Downloading ${file}`, 'success'); // Trigger toast on download
   };
 
   return (
     <div className="view-reports-wrapper">
+      {toast && <Toast message={toast.message} type={toast.type} />} {/* Display toast */}
+
       <div className="sidebar">
         <div className="sidebar-header">
           <h2>Financial Security Hub</h2>
@@ -33,7 +43,7 @@ const Viewreports = () => {
           </ul>
         </div>
         <div className="sidebar-footer">
-          <button>Logout</button>
+          <button onClick={() => showToast('Logged out successfully!', 'info')}>Logout</button>
         </div>
       </div>
 
@@ -48,7 +58,10 @@ const Viewreports = () => {
             <div key={report.id} className="report-item">
               <h2>{report.title}</h2>
               <p>Generated on: {report.date}</p>
-              <button className="download-button" onClick={() => downloadReport(report.file)}>
+              <button
+                className="download-button"
+                onClick={() => downloadReport(report.file)}
+              >
                 Download
               </button>
             </div>

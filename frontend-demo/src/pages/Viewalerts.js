@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Viewalerts.css';
+import Toast from './Toast'; // Assuming a reusable Toast component
 
 const Viewalerts = () => {
   const [alerts, setAlerts] = useState([
@@ -10,10 +11,19 @@ const Viewalerts = () => {
   ]);
 
   const [filter, setFilter] = useState('All');
+  const [toast, setToast] = useState(null); // Toast state
+
+  // Show toast notifications
+  const showToast = (message, type) => {
+    setToast({ message, type });
+    setTimeout(() => setToast(null), 3000); // Auto-hide toast after 3 seconds
+  };
 
   // Handle dismissing an alert
   const dismissAlert = (id) => {
+    const dismissedAlert = alerts.find((alert) => alert.id === id);
     setAlerts(alerts.filter((alert) => alert.id !== id));
+    showToast(`Dismissed: ${dismissedAlert.message}`, 'success'); // Show dismissal toast
   };
 
   // Handle filtering alerts
@@ -21,6 +31,8 @@ const Viewalerts = () => {
 
   return (
     <div className="view-alerts-wrapper">
+      {toast && <Toast message={toast.message} type={toast.type} />} {/* Display toast */}
+
       <div className="sidebar">
         <div className="sidebar-header">
           <h2>Financial Security Hub</h2>
@@ -38,7 +50,7 @@ const Viewalerts = () => {
           </ul>
         </div>
         <div className="sidebar-footer">
-          <button>Logout</button>
+          <button onClick={() => showToast("Logged out successfully!", "info")}>Logout</button>
         </div>
       </div>
 
