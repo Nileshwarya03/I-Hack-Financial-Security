@@ -1,30 +1,93 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Signup.css'; // Importing CSS file
+import Toast from './Toast'; // Importing Toast Component
 
 const Signup = () => {
+  const [toast, setToast] = useState(null); // Toast state for managing messages
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+
+    const { username, email, password, confirmPassword } = formData;
+
+    if (password !== confirmPassword) {
+      setToast({ message: 'Passwords do not match!', type: 'error' });
+      setTimeout(() => setToast(null), 3000);
+      return;
+    }
+
+    try {
+      // Simulating API response for now
+      const response = { success: true }; // Replace this with your API call
+      if (response.success) {
+        setToast({ message: 'Signup Successful!', type: 'success' });
+      } else {
+        setToast({ message: 'Signup failed. Try again.', type: 'error' });
+      }
+    } catch (error) {
+      setToast({ message: 'An error occurred. Please try again later.', type: 'error' });
+    }
+
+    setTimeout(() => setToast(null), 3000); // Hide toast after 3 seconds
+  };
+
   return (
     <div className="signup-page">
+      {toast && <Toast message={toast.message} type={toast.type} />} {/* Show the toast */}
       <div className="signup-container">
         <h2>Sign Up</h2>
-        <form>
+        <form onSubmit={handleSignup}>
           <div className="input-group">
             <label htmlFor="username">Username</label>
-            <input type="text" id="username" name="username" placeholder="Enter your username" />
+            <input
+              type="text"
+              id="username"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+              placeholder="Enter your username"
+            />
           </div>
           <div className="input-group">
             <label htmlFor="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email" />
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Enter your email"
+            />
           </div>
           <div className="input-group">
             <label htmlFor="password">Password</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password" />
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="Enter your password"
+            />
           </div>
           <div className="input-group">
             <label htmlFor="confirm-password">Confirm Password</label>
             <input
               type="password"
-              id="confirm-password"
-              name="confirm-password"
+              id="confirmPassword"
+              name="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleChange}
               placeholder="Confirm your password"
             />
           </div>

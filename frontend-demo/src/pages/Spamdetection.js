@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Spamdetection.css';
+import Toast from './Toast'; // Assuming a reusable Toast component is available
 
 const Spamdetection = () => {
   const [callMetadata, setCallMetadata] = useState({
@@ -9,23 +10,41 @@ const Spamdetection = () => {
   });
   const [transcript, setTranscript] = useState('');
   const [result, setResult] = useState('');
+  const [toast, setToast] = useState(null); // Toast state
+
+  const showToast = (message, type) => {
+    setToast({ message, type });
+    setTimeout(() => setToast(null), 3000); // Hide toast after 3 seconds
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Mocking a call to the backend (which would run the Python code)
-    const response = await fetch('/api/check-spam', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ callMetadata, transcript })
-    });
+    try {
+      // Mocking a call to the backend (which would run the Python code)
+      const response = await fetch('/api/check-spam', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ callMetadata, transcript })
+      });
 
-    const data = await response.json();
-    setResult(data.result);
+      if (response.ok) {
+        const data = await response.json();
+        setResult(data.result);
+        showToast('Spam check completed successfully!', 'success');
+      } else {
+        showToast('Failed to perform spam check. Try again.', 'error');
+      }
+    } catch (error) {
+      showToast('An error occurred. Please try again later.', 'error');
+    }
   };
 
   return (
     <div className="spam-detection-wrapper">
+      {toast && <Toast message={toast.message} type={toast.type} />} {/* Display toast */}
+
+      {/* Sidebar */}
       <div className="sidebar">
         <div className="sidebar-header">
           <h2>Financial Security Hub</h2>
@@ -37,17 +56,17 @@ const Spamdetection = () => {
             <li><a href="/deepfake-detection">Deepfake Detection</a></li>
             <li><a href="/fraud-detection">Financial Fraud Detection</a></li>
             <li><a href="/vkyc-monitoring">vKYC Monitoring</a></li>
-            {/* <li><a href="#risk-assessment">Risk Assessment</a></li> */}
             <li><a href="#alerts">Alerts</a></li>
             <li><a href="#reports">Reports</a></li>
             <li><a href="#account-settings">Account Settings</a></li>
           </ul>
         </div>
         <div className="sidebar-footer">
-          <button>Logout</button>
+          <button onClick={() => showToast('Logged out successfully!', 'info')}>Logout</button>
         </div>
       </div>
 
+      {/* Content */}
       <div className="spam-detection-content">
         <div className="spam-detection-container">
           <div className="spam-detection-header">

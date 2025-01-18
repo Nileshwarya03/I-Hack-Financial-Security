@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import './VKYCmonitoring.css';
+import Toast from './Toast'; // Assuming a reusable Toast component
 
 const VKYCmonitoring = () => {
   const [videoStream, setVideoStream] = useState(null);
   const [isMonitoring, setIsMonitoring] = useState(false);
+  const [toast, setToast] = useState(null); // Toast state
+
+  const showToast = (message, type) => {
+    setToast({ message, type });
+    setTimeout(() => setToast(null), 3000); // Auto-hide toast after 3 seconds
+  };
 
   useEffect(() => {
     if (isMonitoring) {
@@ -26,9 +33,11 @@ const VKYCmonitoring = () => {
       .then((stream) => {
         setVideoStream(stream);
         videoElement.srcObject = stream;
+        showToast("Video stream started successfully", "success");
       })
       .catch((err) => {
         console.error('Error accessing webcam: ', err);
+        showToast("Error accessing webcam. Please check your device.", "error");
       });
   };
 
@@ -37,6 +46,7 @@ const VKYCmonitoring = () => {
       const tracks = videoStream.getTracks();
       tracks.forEach((track) => track.stop());
       setVideoStream(null);
+      showToast("Video stream stopped", "info");
     }
   };
 
@@ -46,6 +56,9 @@ const VKYCmonitoring = () => {
 
   return (
     <div className="vkyc-monitoring-wrapper">
+      {toast && <Toast message={toast.message} type={toast.type} />} {/* Display toast */}
+
+      {/* Sidebar */}
       <div className="sidebar">
         <div className="sidebar-header">
           <h2>Financial Security Hub</h2>
@@ -57,17 +70,17 @@ const VKYCmonitoring = () => {
             <li><a href="/deepfake-detection">Deepfake Detection</a></li>
             <li><a href="/fraud-detection">Financial Fraud Detection</a></li>
             <li><a href="/vkyc-monitoring">vKYC Monitoring</a></li>
-            {/* <li><a href="#risk-assessment">Risk Assessment</a></li> */}
             <li><a href="#alerts">Alerts</a></li>
             <li><a href="#reports">Reports</a></li>
             <li><a href="#account-settings">Account Settings</a></li>
           </ul>
         </div>
         <div className="sidebar-footer">
-          <button>Logout</button>
+          <button onClick={() => showToast("Logged out successfully!", "info")}>Logout</button>
         </div>
       </div>
 
+      {/* Content */}
       <div className="vkyc-monitoring-content">
         <div className="vkyc-monitoring-container">
           <div className="vkyc-monitoring-header">
