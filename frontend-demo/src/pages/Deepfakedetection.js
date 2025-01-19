@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';  // Import useNavigate for redirecting
 import './Deepfakedetection.css';
 import Toast from './Toast'; // Assuming a reusable Toast component
 
@@ -6,6 +7,7 @@ const Deepfakedetection = () => {
   const [file, setFile] = useState(null);
   const [result, setResult] = useState('');
   const [toast, setToast] = useState(null); // Toast state
+  const navigate = useNavigate();  // Hook for navigation
 
   const showToast = (message, type) => {
     setToast({ message, type });
@@ -42,6 +44,14 @@ const Deepfakedetection = () => {
     }
   };
 
+  const handleLogout = () => {
+    // Clear authentication data (sessionStorage, localStorage, or your custom auth logic)
+    localStorage.removeItem('authToken'); // Assuming you use localStorage for auth token
+
+    // Redirect to Login page
+    navigate('/Login');
+  };
+
   return (
     <div className="deepfake-detection-wrapper">
       {toast && <Toast message={toast.message} type={toast.type} />} {/* Display toast */}
@@ -53,18 +63,18 @@ const Deepfakedetection = () => {
         </div>
         <div className="sidebar-nav">
           <ul>
-            <li><a href="/">Dashboard</a></li>
-            <li><a href="/spam-detection">Spam Detection</a></li>
-            <li><a href="/deepfake-detection">Deepfake Detection</a></li>
-            <li><a href="/fraud-detection">Financial Fraud Detection</a></li>
-            <li><a href="/vkyc-monitoring">vKYC Monitoring</a></li>
-            <li><a href="#alerts">Alerts</a></li>
-            <li><a href="#reports">Reports</a></li>
-            <li><a href="#account-settings">Account Settings</a></li>
+            <li><Link to="/Dashboard">Dashboard</Link></li>  {/* Use Link instead of a */}
+            <li><Link to="/Spamdetection">Spam Detection</Link></li>
+            <li><Link to="/Deepfakedetection">Deepfake Detection</Link></li>  {/* Use Link here too */}
+            <li><Link to="/Financialfrauddetection">Financial Fraud Detection</Link></li>
+            <li><Link to="/VKYCmonitoring">vKYC Monitoring</Link></li>
+            <li><Link to="/Viewalerts">Alerts</Link></li>
+            <li><Link to="/Viewreports">Reports</Link></li>
+            <li><Link to="/Settings">Account Settings</Link></li>
           </ul>
         </div>
         <div className="sidebar-footer">
-          <button onClick={() => showToast("Logged out successfully!", "info")}>Logout</button>
+          <button onClick={handleLogout}>Logout</button>  {/* On click, logout */}
         </div>
       </div>
 
