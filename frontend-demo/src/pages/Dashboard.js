@@ -1,13 +1,24 @@
 import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';  // Import useNavigate for redirecting
 import './Dashboard.css';
 import Toast from './Toast'; // Assuming Toast component is already created
 
 const Dashboard = () => {
   const [toast, setToast] = useState(null); // Toast state
-
+  const navigate = useNavigate();  // Hook for navigation
+  
   const handleAction = (actionMessage) => {
     setToast({ message: actionMessage, type: 'info' });
     setTimeout(() => setToast(null), 3000); // Hide toast after 3 seconds
+  };
+
+  
+  const handleLogout = () => {
+    // Clear authentication data (sessionStorage, localStorage, or your custom auth logic)
+    localStorage.removeItem('authToken'); // Assuming you use localStorage for auth token
+
+    // Redirect to Login page
+    navigate('/Login');
   };
 
   return (
@@ -21,18 +32,18 @@ const Dashboard = () => {
         </div>
         <div className="sidebar-nav">
           <ul>
-            <li><a href="/">Dashboard</a></li>
-            <li><a href="/spam-detection">Spam Detection</a></li>
-            <li><a href="/deepfake-detection">Deepfake Detection</a></li>
-            <li><a href="/fraud-detection">Financial Fraud Detection</a></li>
-            <li><a href="/vkyc-monitoring">vKYC Monitoring</a></li>
-            <li><a href="#alerts">Alerts</a></li>
-            <li><a href="#reports">Reports</a></li>
-            <li><a href="#account-settings">Account Settings</a></li>
+            <li><Link to="/Dashboard">Dashboard</Link></li>
+            <li><Link to="/Spamdetection">Spam Detection</Link></li>
+            <li><Link to="/Deepfakedetection">Deepfake Detection</Link></li>
+            <li><Link to="/Financialfrauddetection">Financial Fraud Detection</Link></li>
+            <li><Link to="/VKYCmonitoring">VKYC Monitoring</Link></li>
+            <li><Link to="/Viewalerts">View Alerts</Link></li>
+            <li><Link to="/Viewreports">View Reports</Link></li>
+            <li><Link to="/Settings">Account Settings</Link></li>
           </ul>
         </div>
         <div className="sidebar-footer">
-          <button onClick={() => handleAction('Logged out successfully.')}>Logout</button>
+        <button onClick={handleLogout}>Logout</button>  {/* On click, logout */}
         </div>
       </div>
 
@@ -47,30 +58,30 @@ const Dashboard = () => {
           <div className="main-widget">
             <h2>Spam Detection</h2>
             <p>Latest Scan Results: 95% accuracy</p>
-            <button onClick={() => handleAction('Redirecting to Spam Detection...')}>
-              View Details
-            </button>
+            <Link to="/Spamdetection">
+              <button onClick={() => handleAction('Redirecting to Spam Detection...')}>View Details</button>
+            </Link>
           </div>
           <div className="main-widget">
             <h2>Deepfake Detection</h2>
             <p>2 potential deepfakes detected today</p>
-            <button onClick={() => handleAction('Redirecting to Deepfake Detection...')}>
-              Analyze Video
-            </button>
+            <Link to="/Deepfakedetection">
+              <button onClick={() => handleAction('Redirecting to Deepfake Detection...')}>Analyze Video</button>
+            </Link>
           </div>
           <div className="main-widget">
             <h2>Financial Fraud Detection</h2>
             <p>Current Fraud Risk: High</p>
-            <button onClick={() => handleAction('Redirecting to Financial Fraud Detection...')}>
-              View Transactions
-            </button>
+            <Link to="/Financialfrauddetection">
+              <button onClick={() => handleAction('Redirecting to Financial Fraud Detection...')}>View Transactions</button>
+            </Link>
           </div>
           <div className="main-widget">
-            <h2>vKYC Monitoring</h2>
+            <h2>VKYC Monitoring</h2>
             <p>5 users pending verification</p>
-            <button onClick={() => handleAction('Redirecting to vKYC Monitoring...')}>
-              Start Monitoring
-            </button>
+            <Link to="/VKYCmonitoring">
+              <button onClick={() => handleAction('Redirecting to VKYC Monitoring...')}>Start Monitoring</button>
+            </Link>
           </div>
         </div>
 
@@ -97,12 +108,16 @@ const Dashboard = () => {
           <div className="secondary-widget">
             <h3>Alerts</h3>
             <p>Stay updated with the latest financial security alerts and notifications.</p>
-            <button onClick={() => handleAction('Redirecting to Alerts...')}>View Alerts</button>
+            <Link to="/Viewalerts">
+              <button onClick={() => handleAction('Redirecting to Alerts...')}>View Alerts</button>
+            </Link>
           </div>
           <div className="secondary-widget">
             <h3>Reports</h3>
             <p>Generate and view detailed financial reports and insights.</p>
-            <button onClick={() => handleAction('Redirecting to Reports...')}>View Reports</button>
+            <Link to="/Viewreports">
+              <button onClick={() => handleAction('Redirecting to Reports...')}>View Reports</button>
+            </Link>
           </div>
         </div>
       </div>
