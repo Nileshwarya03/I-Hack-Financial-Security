@@ -142,12 +142,12 @@
     border-left: 5px solid #000000;
   }
   
-  .filter-buttons {
+  .alerts-filter-buttons {
     text-align: center;
     margin-bottom: 20px;
   }
   
-  .filter-buttons button {
+  .alerts-filter-buttons button {
     margin: 5px;
     padding: 10px 20px;
     font-size: 16px;
@@ -159,15 +159,15 @@
     transition: background 0.3s ease;
   }
   
-  .filter-buttons button:hover {
-    background-color: #444;
-  }
-  
-  .filter-buttons .active {
+  .alerts-filter-buttons button:hover {
     background-color: #000000;
   }
   
-  .dismiss-button {
+  .alerts-filter-buttons .active {
+    background-color: #000000;
+  }
+  
+  .alerts-dismiss-button {
     margin-top: 10px;
     padding: 8px 15px;
     font-size: 14px;
@@ -180,12 +180,12 @@
     margin-left: 70%;
   }
   
-  .dismiss-button:hover {
+  .alerts-dismiss-button:hover {
     background-color: #d9d9d9;
     color: #000;
   }
   
-  .no-alerts {
+  .alerts-no-alerts {
     text-align: center;
     font-size: 18px;
     color: #ccc;

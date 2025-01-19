@@ -71,7 +71,7 @@ const Viewalerts = () => {
           <p>Stay updated with the latest alerts regarding financial security.</p>
         </div>
 
-        <div className="filter-buttons">
+        <div className="alerts-filter-buttons">
           <button className={filter === 'All' ? 'active' : ''} onClick={() => setFilter('All')}>All</button>
           <button className={filter === 'Security' ? 'active' : ''} onClick={() => setFilter('Security')}>Security</button>
           <button className={filter === 'Fraud' ? 'active' : ''} onClick={() => setFilter('Fraud')}>Fraud</button>
