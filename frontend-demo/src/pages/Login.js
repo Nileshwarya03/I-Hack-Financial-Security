@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Login.css';
-import Toast from './Toast';  // Importing Toast Component
+import Toast from './Toast'; // Importing Toast Component
 
 const Login = () => {
   const [toast, setToast] = useState(null); // Toast state for managing the messages
@@ -35,6 +35,13 @@ const Login = () => {
           </div>
           <button type="submit">Login</button>
         </form>
+        <div className="additional-links">
+          <a href="/forgotpassword" className="forgot-password-link">Forgot Password?</a>
+          <p>
+            Don't have an account?{' '}
+            <a href="/signup" className="create-account-link">Create an Account</a>
+          </p>
+        </div>
       </div>
     </div>
   );

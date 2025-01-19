@@ -93,6 +93,12 @@ const Signup = () => {
           </div>
           <button type="submit">Sign Up</button>
         </form>
+        <div className="back-to-login">
+          <p>
+            Already have an account?{' '}
+            <a href="/login" className="login-link">Back to Login</a>
+          </p>
+        </div>
       </div>
     </div>
   );

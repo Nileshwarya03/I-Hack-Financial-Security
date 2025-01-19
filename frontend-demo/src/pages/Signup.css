@@ -1,74 +1,91 @@
-/* Signup.css */
-
 .signup-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-image: url('D:\\i-Hack AWS Financial Security\\I-Hack-Financial-Security\\frontend-demo\\public\\assets\\bg2.jpg'); /* Set path to your bg image */
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    color: #ffffff;
-  }
-  
-  .signup-container {
-    background: rgba(255, 255, 255, 0.228); /* Transparent background */
-    border-radius: 15px;
-    padding: 50px; /* Spacious container */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(10px); /* Glass effect */
-    width: 450px; /* Slightly wider for more inputs */
-    text-align: center;
-  }
-  
-  h2 {
-    margin-bottom: 20px;
-    font-size: 38px;
-    margin-top: 0px;
-    font-weight: bold;
-  }
-  
-  .input-group {
-    margin-bottom: 20px; /* Increased margin */
-    width: 94%;
-    text-align: left;
-  }
-  
-  .input-group label {
-    display: block;
-    font-size: 14px;
-    margin-bottom: 5px;
-  }
-  
-  .input-group input {
-    width: 100%;
-    padding: 12px; /* Consistent padding */
-    font-size: 16px;
-    border-radius: 5px;
-    border: none;
-    outline: none;
-    background: rgba(255, 255, 255, 0.2);
-    color: #fff;
-  }
-  
-  .input-group input::placeholder {
-    color: #ffffffb1;
-  }
-  
-  button {
-    width: 100%;
-    padding: 14px; /* Button padding */
-    background-color: #000001f7;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #ffffff95;
-    color: black;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url('D:\\i-Hack AWS Financial Security\\I-Hack-Financial-Security\\frontend-demo\\public\\assets\\bg2.jpg'); /* Set path to your bg image */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: #ffffff;
+}
+
+.signup-container {
+  background: rgba(255, 255, 255, 0.228); /* Transparent background */
+  border-radius: 15px;
+  padding: 50px; /* Spacious container */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px); /* Glass effect */
+  width: 450px; /* Slightly wider for more inputs */
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-size: 38px;
+  margin-top: 0px;
+  font-weight: bold;
+}
+
+.input-group {
+  margin-bottom: 20px; /* Increased margin */
+  width: 94%;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px; /* Consistent padding */
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.input-group input::placeholder {
+  color: #ffffffb1;
+}
+
+button {
+  width: 100%;
+  padding: 14px; /* Button padding */
+  background-color: #000001f7;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #ffffff95;
+  color: black;
+}
+
+.back-to-login {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.back-to-login p {
+  font-size: 14px;
+}
+
+.back-to-login a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #ffffff;
+  transition: color 0.3s ease;
+}
+
+.back-to-login a:hover {
+  color: #000;
+}
