@@ -22,14 +22,13 @@ const Deepfakedetection = () => {
       return;
     }
 
-    try {
-      // Mocking a call to the backend (which would run the Python code)
-      const formData = new FormData();
-      formData.append('file', file);
+    const formData = new FormData();
+    formData.append('file', file);
 
-      const response = await fetch('/api/check-deepfake', {
+    try {
+      const response = await fetch('http://127.0.0.1:5000/api/deepfake-detection', {
         method: 'POST',
-        body: formData
+        body: formData,
       });
 
       if (response.ok) {
@@ -41,6 +40,7 @@ const Deepfakedetection = () => {
       }
     } catch (error) {
       showToast("An error occurred. Please try again later.", "error");
+      console.error("Error:", error); // Log the error for debugging
     }
   };
 
@@ -63,9 +63,9 @@ const Deepfakedetection = () => {
         </div>
         <div className="sidebar-nav">
           <ul>
-            <li><Link to="/Dashboard">Dashboard</Link></li>  {/* Use Link instead of a */}
+            <li><Link to="/Dashboard">Dashboard</Link></li>
             <li><Link to="/Spamdetection">Spam Detection</Link></li>
-            <li><Link to="/Deepfakedetection">Deepfake Detection</Link></li>  {/* Use Link here too */}
+            <li><Link to="/Deepfakedetection">Deepfake Detection</Link></li>
             <li><Link to="/Financialfrauddetection">Financial Fraud Detection</Link></li>
             <li><Link to="/VKYCmonitoring">vKYC Monitoring</Link></li>
             <li><Link to="/Viewalerts">Alerts</Link></li>
@@ -74,7 +74,7 @@ const Deepfakedetection = () => {
           </ul>
         </div>
         <div className="sidebar-footer">
-          <button onClick={handleLogout}>Logout</button>  {/* On click, logout */}
+          <button onClick={handleLogout}>Logout</button>
         </div>
       </div>
 

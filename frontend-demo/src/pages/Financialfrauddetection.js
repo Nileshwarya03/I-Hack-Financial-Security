@@ -5,11 +5,10 @@ import Toast from './Toast'; // Assuming a reusable Toast component
 
 const Financialfrauddetection = () => {
   const [file, setFile] = useState(null);
-  const [result, setResult] = useState([]);
+  const [result, setResult] = useState([]);  // Initialize result as an empty array
   const [loading, setLoading] = useState(false);
   const [toast, setToast] = useState(null); // Toast state
   const navigate = useNavigate();  // Hook for navigation
-  
 
   const showToast = (message, type) => {
     setToast({ message, type });
@@ -24,20 +23,29 @@ const Financialfrauddetection = () => {
       return;
     }
 
+    console.log("File selected:", file); // Check if file is selected
+
+    // Check file type (CSV or JSON)
+    const allowedTypes = ['application/json', 'text/csv'];
+    if (!allowedTypes.includes(file.type)) {
+      showToast("Only CSV or JSON files are allowed", "warning");
+      return;
+    }
+
     setLoading(true);
 
     try {
       const formData = new FormData();
       formData.append('file', file);
 
-      const response = await fetch('/api/financial-fraud-detection', {
+      const response = await fetch('http://127.0.0.1:5000/api/fin-fraud-detection', {
         method: 'POST',
         body: formData,
       });
 
       if (response.ok) {
         const data = await response.json();
-        setResult(data.result);
+        setResult(data.result || []);  // Ensure result is always an array
         showToast("Fraud detection completed successfully!", "success");
       } else {
         showToast("Failed to process the dataset. Please try again.", "error");
@@ -49,7 +57,6 @@ const Financialfrauddetection = () => {
     }
   };
 
-  
   const handleLogout = () => {
     // Clear authentication data (sessionStorage, localStorage, or your custom auth logic)
     localStorage.removeItem('authToken'); // Assuming you use localStorage for auth token
@@ -69,9 +76,9 @@ const Financialfrauddetection = () => {
         </div>
         <div className="sidebar-nav">
           <ul>
-            <li><Link to="/Dashboard">Dashboard</Link></li>  {/* Use Link instead of a */}
+            <li><Link to="/Dashboard">Dashboard</Link></li>
             <li><Link to="/Spamdetection">Spam Detection</Link></li>
-            <li><Link to="/Deepfakedetection">Deepfake Detection</Link></li>  {/* Use Link here too */}
+            <li><Link to="/Deepfakedetection">Deepfake Detection</Link></li>
             <li><Link to="/Financialfrauddetection">Financial Fraud Detection</Link></li>
             <li><Link to="/VKYCmonitoring">vKYC Monitoring</Link></li>
             <li><Link to="/Viewalerts">Alerts</Link></li>
@@ -80,7 +87,7 @@ const Financialfrauddetection = () => {
           </ul>
         </div>
         <div className="sidebar-footer">
-        <button onClick={handleLogout}>Logout</button>  {/* On click, logout */}
+          <button onClick={handleLogout}>Logout</button>  {/* On click, logout */}
         </div>
       </div>
 
