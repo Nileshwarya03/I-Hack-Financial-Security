@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';  // Import useNavigate for redirecting
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate for redirecting
+import axios from 'axios'; // Import Axios
 import './Spamdetection.css';
 import Toast from './Toast'; // Assuming a reusable Toast component is available
 
@@ -12,38 +13,37 @@ const Spamdetection = () => {
   const [transcript, setTranscript] = useState('');
   const [result, setResult] = useState('');
   const [toast, setToast] = useState(null); // Toast state
-  const navigate = useNavigate();  // Hook for navigation
-
+  const navigate = useNavigate(); // Hook for navigation
 
   const showToast = (message, type) => {
     setToast({ message, type });
     setTimeout(() => setToast(null), 3000); // Hide toast after 3 seconds
   };
 
+  // Updated handleSubmit function with Axios
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      // Mocking a call to the backend (which would run the Python code)
-      const response = await fetch('/api/check-spam', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ callMetadata, transcript })
+      // Make a POST request to the Spam Detection API
+      const response = await axios.post("http://127.0.0.1:5000/api/spam-detection", {
+        callMetadata,
+        transcript,
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        setResult(data.result);
-        showToast('Spam check completed successfully!', 'success');
+      // Check if the response was successful
+      if (response.data.result) {
+        setResult(response.data.result); // Update the result with the backend response
+        showToast("Spam check completed successfully!", "success");
       } else {
-        showToast('Failed to perform spam check. Try again.', 'error');
+        showToast("Failed to perform spam check. Try again.", "error");
       }
     } catch (error) {
-      showToast('An error occurred. Please try again later.', 'error');
+      showToast("An error occurred. Please try again later.", "error");
+      console.error("Error:", error); // Log the error for debugging
     }
   };
 
-  
   const handleLogout = () => {
     // Clear authentication data (sessionStorage, localStorage, or your custom auth logic)
     localStorage.removeItem('authToken'); // Assuming you use localStorage for auth token
@@ -62,10 +62,10 @@ const Spamdetection = () => {
           <h2>Financial Security Hub</h2>
         </div>
         <div className="sidebar-nav">
-        <ul>
-            <li><Link to="/Dashboard">Dashboard</Link></li>  {/* Use Link instead of a */}
+          <ul>
+            <li><Link to="/Dashboard">Dashboard</Link></li> {/* Use Link instead of a */}
             <li><Link to="/Spamdetection">Spam Detection</Link></li>
-            <li><Link to="/Deepfakedetection">Deepfake Detection</Link></li>  {/* Use Link here too */}
+            <li><Link to="/Deepfakedetection">Deepfake Detection</Link></li> {/* Use Link here too */}
             <li><Link to="/Financialfrauddetection">Financial Fraud Detection</Link></li>
             <li><Link to="/VKYCmonitoring">vKYC Monitoring</Link></li>
             <li><Link to="/Viewalerts">Alerts</Link></li>
@@ -74,7 +74,7 @@ const Spamdetection = () => {
           </ul>
         </div>
         <div className="sidebar-footer">
-        <button onClick={handleLogout}>Logout</button>  {/* On click, logout */}
+          <button onClick={handleLogout}>Logout</button> {/* On click, logout */}
         </div>
       </div>
 
@@ -92,7 +92,9 @@ const Spamdetection = () => {
                 type="text"
                 id="callerId"
                 value={callMetadata.callerId}
-                onChange={(e) => setCallMetadata({ ...callMetadata, callerId: e.target.value })}
+                onChange={(e) =>
+                  setCallMetadata({ ...callMetadata, callerId: e.target.value })
+                }
                 required
               />
             </div>
@@ -102,7 +104,9 @@ const Spamdetection = () => {
                 type="number"
                 id="callDuration"
                 value={callMetadata.callDuration}
-                onChange={(e) => setCallMetadata({ ...callMetadata, callDuration: e.target.value })}
+                onChange={(e) =>
+                  setCallMetadata({ ...callMetadata, callDuration: e.target.value })
+                }
                 required
               />
             </div>
@@ -112,7 +116,9 @@ const Spamdetection = () => {
                 type="number"
                 id="callFrequency"
                 value={callMetadata.callFrequency}
-                onChange={(e) => setCallMetadata({ ...callMetadata, callFrequency: e.target.value })}
+                onChange={(e) =>
+                  setCallMetadata({ ...callMetadata, callFrequency: e.target.value })
+                }
                 required
               />
             </div>
