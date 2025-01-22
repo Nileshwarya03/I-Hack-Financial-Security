@@ -134,8 +134,8 @@ const Settingspage = () => {
           </label>
           <button className="save-button" onClick={updateNotificationPreferences}>Update Preferences</button>
         </div>
+        <p>Note: This settings page is for display purposes only. Changes made here do not reflect actual updates.</p>
 
-        {/* You can add password section here if needed */}
       </div>
     </div>
   );

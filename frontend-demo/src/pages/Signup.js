@@ -27,12 +27,20 @@ const Signup = () => {
     }
 
     try {
-      // Simulating API response for now
-      const response = { success: true }; // Replace this with your API call
-      if (response.success) {
+      const response = await fetch('http://localhost:5000/api/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, email, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
         setToast({ message: 'Signup Successful!', type: 'success' });
       } else {
-        setToast({ message: 'Signup failed. Try again.', type: 'error' });
+        setToast({ message: data.message || 'Signup failed. Try again.', type: 'error' });
       }
     } catch (error) {
       setToast({ message: 'An error occurred. Please try again later.', type: 'error' });
@@ -56,6 +64,7 @@ const Signup = () => {
               value={formData.username}
               onChange={handleChange}
               placeholder="Enter your username"
+              required
             />
           </div>
           <div className="input-group">
@@ -67,6 +76,7 @@ const Signup = () => {
               value={formData.email}
               onChange={handleChange}
               placeholder="Enter your email"
+              required
             />
           </div>
           <div className="input-group">
@@ -78,10 +88,11 @@ const Signup = () => {
               value={formData.password}
               onChange={handleChange}
               placeholder="Enter your password"
+              required
             />
           </div>
           <div className="input-group">
-            <label htmlFor="confirm-password">Confirm Password</label>
+            <label htmlFor="confirmPassword">Confirm Password</label>
             <input
               type="password"
               id="confirmPassword"
@@ -89,6 +100,7 @@ const Signup = () => {
               value={formData.confirmPassword}
               onChange={handleChange}
               placeholder="Confirm your password"
+              required
             />
           </div>
           <button type="submit">Sign Up</button>

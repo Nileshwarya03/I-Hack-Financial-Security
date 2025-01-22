@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import './Setpassword.css'; // Importing CSS file
 import Toast from './Toast'; // Importing Toast Component
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate hook for redirection
 
 const SetPassword = () => {
   const [toast, setToast] = useState(null); // State for managing toast messages
   const [newPassword, setNewPassword] = useState(''); // State for new password
   const [confirmPassword, setConfirmPassword] = useState(''); // State for confirm password
+  const navigate = useNavigate(); // Initialize navigate for redirection
 
   const handleSetPassword = async (e) => {
     e.preventDefault();
@@ -24,16 +27,26 @@ const SetPassword = () => {
     }
 
     try {
-      // Simulate API call for now
-      const response = { success: true }; // Replace with actual API call
-      if (response.success) {
+      // Make API call to set the new password
+      const response = await axios.post('http://localhost:5000/api/set-password', {
+        newPassword: newPassword,
+        confirmPassword: confirmPassword,
+      });
+
+      if (response.data.success) {
         setToast({ message: 'Password updated successfully!', type: 'success' });
         setNewPassword('');
         setConfirmPassword('');
+
+        // Redirect to login page after successful password update
+        setTimeout(() => {
+          navigate('/login'); // Adjust this based on your route
+        }, 3000); // Wait for toast to hide before redirecting
       } else {
-        setToast({ message: 'Failed to update password. Please try again.', type: 'error' });
+        setToast({ message: response.data.message, type: 'error' });
       }
     } catch (error) {
+      console.error('Error occurred:', error);  // Log the error to console for debugging
       setToast({ message: 'An error occurred. Please try again later.', type: 'error' });
     }
 
