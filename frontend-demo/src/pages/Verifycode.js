@@ -71,14 +71,14 @@ const VerifyCode = () => {
             />
           </div>
           <div className="input-group">
-            <label htmlFor="code">Verification Code</label>
+            <label htmlFor="code">Verification Token</label>
             <input
               type="text"
               id="code"
               name="code"
               value={code}
               onChange={handleChange}
-              placeholder="Enter your code"
+              placeholder="Enter the token"
               required
             />
           </div>
