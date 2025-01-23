@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
+from dotenv import load_dotenv
 import os
 import csv
 import json
@@ -10,6 +11,8 @@ import datetime
 import random
 import string
 
+load_dotenv() 
+
 app = Flask(__name__)
 CORS(app)
 
@@ -18,6 +21,14 @@ ALLOWED_EXTENSIONS = {'csv', 'json'}
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # Max 16 MB file size
+
+
+# MongoDB connection using environment variable
+mongo_uri = os.getenv('MONGO_URI')  
+mongo_client = MongoClient(mongo_uri)
+db = mongo_client["iHackDatabase"]  
+users_collection = db["users"]  
+
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -166,10 +177,6 @@ def vkyc():
     else:
         return jsonify({"error": "Invalid action"}), 400
 
-# MongoDB connection
-mongo_client = MongoClient("mongodb+srv://i-hack-fin-sec-user:iworkedhardonthisone0305@cluster0.cxzfg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-db = mongo_client["iHackDatabase"]  # Replace with your database name
-users_collection = db["users"]  # Collection for user data
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -201,30 +208,7 @@ def signup():
     return jsonify({"success": True, "message": "User registered successfully"}), 201
 
 # LOGIN
-# @app.route('/api/login', methods=['POST'])
-# def login():
-#     data = request.get_json()
 
-#     email = data.get("email")
-#     password = data.get("password")
-
-#     if not email or not password:
-#         return jsonify({"success": False, "message": "Missing required fields"}), 400
-
-#     # Check if user exists
-#     user = users_collection.find_one({"email": email})
-#     if user is None:
-#         return jsonify({"success": False, "message": "User not found"}), 404
-
-#     # Check if the password is correct
-#     if user["password"] != password:
-#         return jsonify({"success": False, "message": "Incorrect password"}), 401
-
-#     return jsonify({"success": True, "message": "Login successful"}), 200
-
-# # Generate a random token (for password reset link simulation)
-# def generate_token():
-#     return ''.join(random.choices(string.ascii_letters + string.digits, k=20))
 
 from werkzeug.security import check_password_hash  # Import for checking hashed passwords
 
