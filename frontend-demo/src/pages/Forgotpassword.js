@@ -27,7 +27,7 @@ const ForgotPassword = () => {
       const response = await axios.post('http://localhost:5000/api/forgot-password', { email });
       
       if (response.data.success) {
-        setToast({ message: 'Password reset code sent to your email!', type: 'success' });
+        setToast({ message: 'Password reset Token sent!', type: 'success' });
 
         // Redirect to Verify Code page after successful password reset request
         setTimeout(() => {
@@ -67,6 +67,7 @@ const ForgotPassword = () => {
           <p>
             Remember your password?{' '}
             <a href="/login" className="login-link">Back to Login</a>
+            <p> Note: kindly read the note mentioned about verification code in README.md file </p>
           </p>
         </div>
       </div>
